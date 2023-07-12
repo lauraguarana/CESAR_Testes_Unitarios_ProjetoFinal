@@ -25,7 +25,6 @@ class Restaurant:
            return f"{self.restaurant_name} já está aberto!"
         else:
             self.open = True
-            #print(f"{self.restaurant_name} agora está aberto!")
             return self.restaurant_name + " agora está aberto!"
 
     def close_restaurant(self, is_open):
@@ -73,5 +72,4 @@ class Restaurant:
         # -------- MELHORIA: foi adicionado esse método para  obter o número total de clientes atendidos até o momento.
         # -------- Esse método não terá teste unitário pois só utilizamos para retornar o valor atual de clientes atendidos.
 
-        """Retorna o número total de clientes atendidos até o momento."""
         return self.number_served
