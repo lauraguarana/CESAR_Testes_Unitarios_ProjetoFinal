@@ -12,9 +12,7 @@ class Restaurant:
         # -------- BUG: Na chamada do nome do restaurante estava sendo utilizado o self.cuisine_type ao invés do self.restaurant_name
         # -------- MELHORIA: De acordo com o Clean Code, a descrição do restaurante foi atualizada pelo código abaixo.
 
-
-        """Imprima uma descrição simples da instância do restaurante."""
-        description = f"Restaurante: {self.restaurant_name}\nTipo de Cozinha: {self.cuisine_type}\nClientes Atendidos: {self.number_served}"
+        description = "Restaurante: " + self.restaurant_name + "\nTipo de Cozinha: " + self.cuisine_type + "\nClientes Atendidos: " + str(self.number_served)
 
         return description
 
@@ -23,26 +21,23 @@ class Restaurant:
         # ---------- BUG: a atribuição self.number_served = -2 estava incorreta. Isso definirá o número de clientes atendidos como -2 quando o restaurante for aberto.
         # ---------- MELHORIA: Foi adicionado um parametro indicando se o restaurante está aberto ou fechado e foi removido os prints para ter um clean code.
 
-        """Imprime uma mensagem indicando que o restaurante está aberto para negócios."""
         if is_open:
-            #print(f"{self.restaurant_name} já está aberto!")
-           return "Delicious Eatery já está aberto!"
+           return f"{self.restaurant_name} já está aberto!"
         else:
             self.open = True
             #print(f"{self.restaurant_name} agora está aberto!")
-            return "Delicious Eatery agora está aberto!"
+            return self.restaurant_name + " agora está aberto!"
 
     def close_restaurant(self, is_open):
 
         # ---------- BUG: Foi removido o self.number_served = 0 porque o número de clientes atendidos não precisa ser resetado quando o restaurante é fechado.
         # ---------- MELHORIA: Foi adicionado um parametro indicando se o restaurante está aberto ou fechado e foi removido os prints para ter um clean code.
 
-        """Imprime uma mensagem indicando que o restaurante está fechado para negócios."""
         if is_open:
             self.open = False
-            return "Delicious Eatery agora está fechado!"
+            return self.restaurant_name + " agora está fechado!"
         else:
-            return "Delicious Eatery já está fechado!"
+            return self.restaurant_name + " está fechado!"
 
     def set_number_served(self, total_customers, is_open):
 
@@ -50,15 +45,14 @@ class Restaurant:
         # ---------- Foi adicionado uma mensagem para informar que o número de pessoas atendidas foi atualizado
         # ---------- Foi adicionado um parametro indicando se o restaurante está aberto ou fechado.
 
-        """Define o número total de pessoas atendidas por este restaurante até o momento."""
         if is_open:
-            if total_customers >= 0:
+            if total_customers > 0:
                 self.number_served = total_customers
-                return (f"O número de pessoas atendidas foi atualizado para: {total_customers}")
+                return "O número de pessoas atendidas foi atualizado para: " + str(total_customers)
             else:
-                return "O número de clientes atendidos não pode ser negativo."
+                return "O número de clientes atendidos não pode ser negativo ou igual a zero."
         else:
-            return "Delicious Eatery está fechado!"
+            return self.restaurant_name + " está fechado!"
 
     def increment_number_served(self, more_customers, is_open):
 
@@ -67,17 +61,17 @@ class Restaurant:
         # ---------- Foi adicionado uma mensagem para informando que o número de pessoas atendidas foi atualizado
         # ---------- Foi adicionado um parametro indicando se o restaurante está aberto ou fechado.
 
-        """Aumenta o número total de clientes atendidos por este restaurante."""
         if is_open:
             if more_customers > 0:
                 self.number_served += more_customers
-                print(f"O número de pessoas atendidas foi atualizado para: {self.number_served}")
+                return "O número de pessoas atendidas foi atualizado para: " + str(self.number_served)
         else:
-            print(f"{self.restaurant_name} está fechado!")
+            return self.restaurant_name + " está fechado!"
 
     def get_number_served(self):
 
         # -------- MELHORIA: foi adicionado esse método para  obter o número total de clientes atendidos até o momento.
+        # -------- Esse método não terá teste unitário pois só utilizamos para retornar o valor atual de clientes atendidos.
 
         """Retorna o número total de clientes atendidos até o momento."""
         return self.number_served
